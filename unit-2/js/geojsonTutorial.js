@@ -1,5 +1,5 @@
-// GeoJSON tutorial for Leaflet.js
-// https://leafletjs.com/examples/geojson/
+/* GeoJSON tutorial for Leaflet.js */
+/* https://leafletjs.com/examples/geojson/ */
 
 // initialize the map
 ///////////////////////////////////////////////////////////////

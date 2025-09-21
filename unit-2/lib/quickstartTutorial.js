@@ -1,5 +1,5 @@
-// Quickstart tutorial for Leaflet.js
-// https://leafletjs.com/examples/quick-start/
+/* Quickstart tutorial for Leaflet.js */
+/* https://leafletjs.com/examples/quick-start/ */
 
 // initialize the map 
 // set its view to our chosen geographical coordinates and a zoom level

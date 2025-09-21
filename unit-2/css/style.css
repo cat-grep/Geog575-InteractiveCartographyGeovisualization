@@ -1,1 +1,40 @@
-#map { height: 300px; }
+html {
+    height: 100%
+}
+
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  position: absolute;
+  top: 10px;
+  width: 100%;
+  text-align: center;
+  z-index: 1000;
+  color: #000;
+  text-shadow: 0 0 5px #fff, 0 0 7px #fff, 0 0 9px #fff;
+}
+
+#map {
+  height: 100vh;
+}
+
+.leaflet-tooltip.year-label {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    margin-left: 2px;
+    font: 12px/1.2 Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: #fff;
+    text-shadow: 0 0 3px #000, 0 0 5px #000, 0 0 7px #000;
+    pointer-events: none;
+}
+
+.leaflet-tooltip.year-label::before {
+    display: none !important;
+}

@@ -1,32 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width">
-            <title></title>
 
-        <!--put your external stylesheet links here-->
-        <link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" href="lib/leaflet.css">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>North Magnetic Polar Drift</title>
 
-        <!--[if IE<9]>
+    <!--put your external stylesheet links here-->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="lib/leaflet.css">
+
+    <!--[if IE<9]>
             <link rel="stylesheet" href="css/style.ie.css">
         <![endif]-->
 
-         <!--you can also place internal styles here;
+    <!--you can also place internal styles here;
              place these within <style> tags-->
-        
-    </head>
 
-    <body>
-        <!--put your initial page content here-->
-        <div id="map"></div>
-        
+</head>
 
-        <!--put your external script links here-->
-        <script type="text/javascript" src="lib/leaflet-src.js"></script>
-        <script type="text/javascript" src="js/main.js"></script>
-        <!-- <script type="text/javascript" src="js/quickstartTutorial.js"></script> -->
-        <script type="text/javascript" src="js/geojsonTutorial.js"></script>
-    </body>
+<body>
+
+    <h1 style="text-align:center; margin:10px 0;">
+        North Magnetic Polar Drift
+    </h1>
+
+    <!--put your initial page content here-->
+    <div id="map" class="map"></div>
+
+
+    <!--put your external script links here-->
+    <script type="text/javascript" src="lib/leaflet-src.js"></script>
+    <!-- <script type="text/javascript" src="lib/leaflet-providers.js"></script> -->
+    <script type="text/javascript" src="lib/proj4.js"></script>
+    <script type="text/javascript" src="lib/proj4leaflet.js"></script>
+
+    <script type="text/javascript" src="js/main.js"></script>
+    <!-- <script type="text/javascript" src="js/quickstartTutorial.js"></script> -->
+    <!-- <script type="text/javascript" src="js/geojsonTutorial.js"></script> -->
+    <!-- <script type="text/javascript" src="js/adaptedTutorial.js"></script> -->
+    <!-- <script type="text/javascript" src="js/leaflet-providers-demo.js"></script> -->
+</body>
+
 </html>
