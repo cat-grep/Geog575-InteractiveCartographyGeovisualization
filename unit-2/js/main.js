@@ -1,17 +1,17 @@
-/* Map of GeoJSON data from WiDNR_Community_Trees_Madison_Ginkgo.geojson */
-//https://data-wi-dnr.opendata.arcgis.com/datasets/wi-dnr::fd-wisconsin-community-trees-layer/explore
+/* Map of GeoJSON data from NBA_Arenas_Annual_Attendance.geojson */
+//https://www.espn.com/nba/attendance/
 
 //declare map var in global scope
 var map;
 var minValue;
 
-//function to instantiate the Leaflet map
+//instantiate the Leaflet map
 function createMap() {
 
     //create the map
     map = L.map('map', {
-        center: [43.08, -89.4],
-        zoom: 13
+        center: [37, -95],
+        zoom: 4
     });
 
     //add Esri World Gray Canvas (light gray) base tilelayer
@@ -25,6 +25,7 @@ function createMap() {
     getData();
 };
 
+//calculate the minimum data value for the attendance in the dataset
 function calculateMinValue(data) {
 
     //create empty array to store all data values
@@ -32,8 +33,8 @@ function calculateMinValue(data) {
 
     //loop through each tree
     for (var feature of data.features) {
-        var diameter = Number(feature.properties["Diameter__in__"]);
-        allValues.push(diameter);
+        var attendance = Number(feature.properties["TOTAL_2016"]);
+        allValues.push(attendance);
     }
 
     //get minimum value of our array
@@ -46,7 +47,7 @@ function calculateMinValue(data) {
 function calcPropRadius(attValue) {
 
     //constant factor adjusts symbol sizes evenly
-    var minRadius = 3;
+    var minRadius = 16;
 
     //Flannery Apperance Compensation formula
     var radius = 1 * Math.pow(attValue / minValue, 0.5) * minRadius
@@ -54,98 +55,16 @@ function calcPropRadius(attValue) {
     return radius;
 };
 
-//function to bind popups to each feature
-function onEachFeature(feature, layer) {
-    if (!feature.properties) return;
-
-    const FIELD_ORDER = [
-        // "Primary_ID",
-        // "Code",
-        "Latin_Name",
-        "Common_Name",
-        // "Cultivar",
-        "Diameter__in__",
-        // "Diameter__in___Range",
-        // "Diameter_height__if_not_4_5___",
-        // "Height__ft__",
-        // "Height__ft___Range",
-        // "Growing_Space",
-        "Inventory_Year",
-        // "Land_Use",
-        // "Planting_Strip_Width__ft___Rang",
-        "Address",
-        "Latitude",
-        "Longitude",
-        // "Community",
-        // "Year_Planted",
-        // "ObjectId"
-    ];
-
-    const FIELD_LABELS = {
-        // Primary_ID: "Primary ID",
-        // Code: "Code",
-        Latin_Name: "Latin Name",
-        Common_Name: "Common Name",
-        // Cultivar: "Cultivar",
-        Diameter__in__: "DBH (in)",
-        // Diameter__in___Range: "DBH Range (in)",
-        // Diameter_height__if_not_4_5___: "Diameter Height (if not 4.5')",
-        // Height__ft__: "Height (ft)",
-        // Height__ft___Range: "Height Range (ft)",
-        // Growing_Space: "Growing Space",
-        Inventory_Year: "Inventory Year",
-        // Land_Use: "Land Use",
-        // Planting_Strip_Width__ft___Rang: "Planting Strip Width (ft) Range",
-        Address: "Address",
-        Latitude: "Latitude",
-        Longitude: "Longitude",
-        // Community: "Community",
-        // Year_Planted: "Year Planted",
-        // ObjectId: "Object ID"
-    };
-
-    // minimal helpers (scoped inside, no globals)
-    const esc = (s) => String(s)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;");
-
-    const fmt = (v, key) => {
-        if (v === null || v === undefined || v === "") return "&lt;NULL&gt;";
-        if ((key === "Latitude" || key === "Longitude") && !Number.isNaN(Number(v))) {
-            return Number(v).toFixed(6);
-        }
-        return esc(v);
-    };
-
-    const keys = (FIELD_ORDER && FIELD_ORDER.length)
-        ? FIELD_ORDER.filter(k => k in feature.properties)
-        : Object.keys(feature.properties);
-
-    const rows = keys.map((key) => {
-        const label = esc(FIELD_LABELS[key] || key);
-        const val = fmt(feature.properties[key], key);
-        return `<tr>
-                    <th style="text-align:right;padding:6px 8px;border:1px solid #ddd;background:#f6f7f9;">${label}</th>
-                    <td style="padding:6px 8px;border:1px solid #ddd;background:#fff;">${val}</td>
-                </tr>`;
-        }).join("");
-
-    const table = `<table style="border-collapse:collapse;width:100%;font-size:13px;line-height:1.35;">
-                        <tbody>${rows}</tbody>
-                    </table>`;
-
-    layer.bindPopup(table);
-};
-
-function pointToLayer(feature, latlng) {
+//convert markers to circle markers
+function pointToLayer(feature, latlng, attributes) {
     //Determine which attribute to visualize with proportional symbols
-    var attribute = "Diameter__in__";
+    var attribute = attributes[0];
+    //check
+    console.log(attribute);
 
     //create marker options
     var options = {
-        fillColor: "#006400",
+        fillColor: "#016ecd",
         color: "#fff",
         weight: 1,
         opacity: 0.8,
@@ -165,29 +84,170 @@ function pointToLayer(feature, latlng) {
     return layer;
 };
 
-function createPropSymbols(data) {
+//convert number to string and add commas
+function formatNumber(n) {
+  if (n === null || n === undefined || n === "") return "—";
+  return Number(n).toLocaleString();
+}
+
+//build popup content
+function buildPopup(feature, attribute) {
+  const p = feature.properties || {};
+  const year = attribute.split("_")[1];
+  const val = p[attribute];
+
+  return `
+    <div style="font:13px/1.35 Cambria, Georgia, 'Times New Roman', serif">
+      <table style="border-collapse:collapse;width:100%">
+        <tbody>
+          <tr>
+            <th style="text-align:right;padding:6px 8px;border:1px solid #ddd;background:#f6f7f9;">Team</th>
+            <td style="padding:6px 8px;border:1px solid #ddd;background:#fff;">${p.TEAM ?? "—"}</td>
+          </tr>
+          <tr>
+            <th style="text-align:right;padding:6px 8px;border:1px solid #ddd;background:#f6f7f9;">Arena</th>
+            <td style="padding:6px 8px;border:1px solid #ddd;background:#fff;">${p.ARENA ?? "—"}</td>
+          </tr>
+          <tr>
+            <th style="text-align:right;padding:6px 8px;border:1px solid #ddd;background:#f6f7f9;">Address</th>
+            <td style="padding:6px 8px;border:1px solid #ddd;background:#fff;">${p.ADDRESS ?? "—"}</td>
+          </tr>
+          <tr>
+            <th style="text-align:right;padding:6px 8px;border:1px solid #ddd;background:#f6f7f9;">Attendance ${year}</th>
+            <td style="padding:6px 8px;border:1px solid #ddd;background:#fff;">${formatNumber(val)}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>`;
+}
+
+//create proportional symbols
+function createPropSymbols(data, attributes) {
     //create a Leaflet GeoJSON layer and add it to the map
     L.geoJson(data, {
-        pointToLayer: pointToLayer,
-        onEachFeature: onEachFeature
-    }).addTo(map);
+    pointToLayer: function (feature, latlng) {
+      return pointToLayer(feature, latlng, attributes);
+    },
+    onEachFeature: function(feature, layer) {
+      // bind popup using the first attribute
+      layer.bindPopup(buildPopup(feature, attributes[0]));
+    }
+  }).addTo(map);
 };
 
-//function to retrieve the data and place it on the map
+//resize proportional symbols according to new attribute values
+function updatePropSymbols(attribute) {
+    map.eachLayer(function (layer) {
+    if (layer.feature && layer.feature.properties[attribute]) {
+      const props = layer.feature.properties;
+
+      // resize symbol
+      const radius = calcPropRadius(props[attribute]);
+      layer.setRadius(radius);
+
+      // refresh popup content for the new year
+      const popup = layer.getPopup();
+      if (popup) {
+        popup.setContent(buildPopup(layer.feature, attribute)).update();
+      }
+    }
+  });
+};
+
+//create sequence controls
+function createSequenceControls(attributes) {
+    const maxIndex = attributes.length - 1;
+
+    const html = `
+    <div id="controls-row" class="controls-row">
+      <button class="step" id="reverse" title="Previous">
+        <img src="img/reverse.png" alt="" />
+      </button>
+
+      <div class="slider-wrap" aria-hidden="false">
+        <input id="year-slider" class="range-slider" type="range"
+               min="0" max="${maxIndex}" step="1" value="0">
+        <div id="ticks" class="ticks" role="presentation">
+          ${attributes.map((attr, i) => {
+                const pct = maxIndex > 0 ? (i / maxIndex) : 0;
+                const label = attr.split("_")[1];
+                return `<span class="tick" style="--pct:${pct}">
+                            <i></i><em>${label}</em>
+                            </span>`;
+            }).join("")}
+        </div>
+      </div>
+
+      <button class="step" id="forward" title="Next">
+        <img src="img/forward.png" alt="" />
+      </button>
+    </div>
+  `;
+
+    const panel = document.querySelector("#panel");
+    panel.insertAdjacentHTML('beforeend', html);
+
+    // set up events
+    const slider = document.getElementById('year-slider');
+
+    document.querySelectorAll('.step').forEach(btn => {
+        btn.addEventListener('click', () => {
+            let index = Number(slider.value);
+            if (btn.id === 'forward') index = (index + 1) > maxIndex ? 0 : index + 1;
+            else index = (index - 1) < 0 ? maxIndex : index - 1;
+            slider.value = index;
+            updatePropSymbols(attributes[index]);
+        });
+    });
+
+    slider.addEventListener('input', function () {
+        updatePropSymbols(attributes[Number(this.value)]);
+    });
+}
+
+//build an attributes array from the data
+function processData(data) {
+    //empty array to hold attributes
+    var attributes = [];
+
+    //properties of the first feature in the dataset
+    var properties = data.features[0].properties;
+
+    //push each attribute name into attributes array
+    for (var attribute in properties) {
+        //only take attributes with population values
+        if (attribute.indexOf("TOTAL") > -1) {
+            attributes.push(attribute);
+        };
+    };
+
+    //check result
+    console.log(attributes);
+
+    return attributes;
+};
+
+//retrieve the data and place it on the map
 function getData() {
 
     //load the data
-    fetch("data/WiDNR_Community_Trees_Madison_Ginkgo.geojson")
+    fetch("data/NBA_Arenas_Annual_Attendance.geojson")
         .then(function (response) {
             return response.json();
         })
         .then(function (json) {
 
+            //create an attributes array
+            var attributes = processData(json);
+
             //calculate minimum data value
             minValue = calculateMinValue(json);
 
             //call function to create proportional symbols
-            const layer = createPropSymbols(json);
+            createPropSymbols(json, attributes);
+
+            //call function to create sequence controls
+            createSequenceControls(attributes);
         });
 };
 

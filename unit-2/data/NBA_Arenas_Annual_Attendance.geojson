@@ -1,0 +1,755 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.1719,
+          39.9012
+        ]
+      },
+      "properties": {
+        "TEAM": "76ers",
+        "ARENA": "Xfinity Mobile Arena",
+        "ADDRESS": "3601 S Broad St, Philadelphia, PA 19148",
+        "TOTAL_2025": 813621,
+        "TOTAL_2024": 821714,
+        "TOTAL_2023": 839261,
+        "TOTAL_2022": 846867,
+        "TOTAL_2021": 68583,
+        "TOTAL_2020": 639491,
+        "TOTAL_2019": 838092,
+        "TOTAL_2018": 833503,
+        "TOTAL_2017": 710557,
+        "TOTAL_2016": 610121
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.9172,
+          43.0451
+        ]
+      },
+      "properties": {
+        "TEAM": "Bucks",
+        "ARENA": "Fiserv Forum",
+        "ADDRESS": "1111 Vel R. Phillips Ave, Milwaukee, WI 53203",
+        "TOTAL_2025": 732014,
+        "TOTAL_2024": 740885,
+        "TOTAL_2023": 718786,
+        "TOTAL_2022": 715581,
+        "TOTAL_2021": 64780,
+        "TOTAL_2020": 549036,
+        "TOTAL_2019": 721692,
+        "TOTAL_2018": 685303,
+        "TOTAL_2017": 648952,
+        "TOTAL_2016": 621808
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.6742,
+          41.8807
+        ]
+      },
+      "properties": {
+        "TEAM": "Bulls",
+        "ARENA": "United Center",
+        "ADDRESS": "1901 W Madison St, Chicago, IL 60612",
+        "TOTAL_2025": 825659,
+        "TOTAL_2024": 845620,
+        "TOTAL_2023": 841632,
+        "TOTAL_2022": 856148,
+        "TOTAL_2021": 13655,
+        "TOTAL_2020": 639352,
+        "TOTAL_2019": 823475,
+        "TOTAL_2018": 851824,
+        "TOTAL_2017": 888882,
+        "TOTAL_2016": 894659
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -81.6882,
+          41.4965
+        ]
+      },
+      "properties": {
+        "TEAM": "Cavaliers",
+        "ARENA": "Rocket Arena",
+        "ADDRESS": "1 Center Ct, Cleveland, OH 44115",
+        "TOTAL_2025": 796712,
+        "TOTAL_2024": 793167,
+        "TOTAL_2023": 777280,
+        "TOTAL_2022": 758228,
+        "TOTAL_2021": 91476,
+        "TOTAL_2020": 623576,
+        "TOTAL_2019": 793337,
+        "TOTAL_2018": 843042,
+        "TOTAL_2017": 843042,
+        "TOTAL_2016": 843042
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.0622,
+          42.3663
+        ]
+      },
+      "properties": {
+        "TEAM": "Celtics",
+        "ARENA": "TD Garden",
+        "ADDRESS": "100 Legends Way, Boston, MA 02114",
+        "TOTAL_2025": 785396,
+        "TOTAL_2024": 785396,
+        "TOTAL_2023": 766240,
+        "TOTAL_2022": 766240,
+        "TOTAL_2021": 30067,
+        "TOTAL_2020": 610864,
+        "TOTAL_2019": 763584,
+        "TOTAL_2018": 744960,
+        "TOTAL_2017": 760690,
+        "TOTAL_2016": 749076
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -118.342621,
+          33.943813
+        ]
+      },
+      "properties": {
+        "TEAM": "Clippers",
+        "ARENA": "Intuit Dome",
+        "ADDRESS": "3930 W Century Blvd, Inglewood, CA 90303",
+        "TOTAL_2025": 679220,
+        "TOTAL_2024": 776782,
+        "TOTAL_2023": 720543,
+        "TOTAL_2022": 694005,
+        "TOTAL_2021": 13901,
+        "TOTAL_2020": 610176,
+        "TOTAL_2019": 710327,
+        "TOTAL_2018": 697812,
+        "TOTAL_2017": 782609,
+        "TOTAL_2016": 786910
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.050583,
+          35.138232
+        ]
+      },
+      "properties": {
+        "TEAM": "Grizzlies",
+        "ARENA": "FedExForum",
+        "ADDRESS": "191 Beale St, Memphis, TN 38103",
+        "TOTAL_2025": 683067,
+        "TOTAL_2024": 681875,
+        "TOTAL_2023": 707836,
+        "TOTAL_2022": 646785,
+        "TOTAL_2021": 61449,
+        "TOTAL_2020": 523297,
+        "TOTAL_2019": 607564,
+        "TOTAL_2018": 653863,
+        "TOTAL_2017": 677314,
+        "TOTAL_2016": 684603
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.396371,
+          33.757247
+        ]
+      },
+      "properties": {
+        "TEAM": "Hawks",
+        "ARENA": "State Farm Arena",
+        "ADDRESS": "1 State Farm Dr, Atlanta, GA 30303",
+        "TOTAL_2025": 657613,
+        "TOTAL_2024": 696418,
+        "TOTAL_2023": 719787,
+        "TOTAL_2022": 672742,
+        "TOTAL_2021": 59288,
+        "TOTAL_2020": 545453,
+        "TOTAL_2019": 628440,
+        "TOTAL_2018": 590769,
+        "TOTAL_2017": 654306,
+        "TOTAL_2016": 690150
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.186969,
+          25.781401
+        ]
+      },
+      "properties": {
+        "TEAM": "Heat",
+        "ARENA": "Kaseya Center",
+        "ADDRESS": "601 Biscayne Blvd, Miami, FL 33132",
+        "TOTAL_2025": 808337,
+        "TOTAL_2024": 809743,
+        "TOTAL_2023": 807190,
+        "TOTAL_2022": 804761,
+        "TOTAL_2021": 0,
+        "TOTAL_2020": 629771,
+        "TOTAL_2019": 805264,
+        "TOTAL_2018": 785250,
+        "TOTAL_2017": 805400,
+        "TOTAL_2016": 809350
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.839225,
+          35.225103
+        ]
+      },
+      "properties": {
+        "TEAM": "Hornets",
+        "ARENA": "Spectrum Center",
+        "ADDRESS": "333 E Trade St, Charlotte, NC 28202",
+        "TOTAL_2025": 703935,
+        "TOTAL_2024": 674400,
+        "TOTAL_2023": 702052,
+        "TOTAL_2022": 700755,
+        "TOTAL_2021": 68255,
+        "TOTAL_2020": 478591,
+        "TOTAL_2019": 676570,
+        "TOTAL_2018": 671404,
+        "TOTAL_2017": 710643,
+        "TOTAL_2016": 716894
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.901047,
+          40.768272
+        ]
+      },
+      "properties": {
+        "TEAM": "Jazz",
+        "ARENA": "Delta Center",
+        "ADDRESS": "301 W South Temple, Salt Lake City, UT 84101",
+        "TOTAL_2025": 745175,
+        "TOTAL_2024": 746446,
+        "TOTAL_2023": 728240,
+        "TOTAL_2022": 750546,
+        "TOTAL_2021": 151300,
+        "TOTAL_2020": 567486,
+        "TOTAL_2019": 750546,
+        "TOTAL_2018": 734806,
+        "TOTAL_2017": 806605,
+        "TOTAL_2016": 791489
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.499699,
+          38.580286
+        ]
+      },
+      "properties": {
+        "TEAM": "Kings",
+        "ARENA": "Golden 1 Center",
+        "ADDRESS": "500 David J Stern Walk, Sacramento, CA 95814",
+        "TOTAL_2025": 679565,
+        "TOTAL_2024": 735015,
+        "TOTAL_2023": 715491,
+        "TOTAL_2022": 577583,
+        "TOTAL_2021": 0,
+        "TOTAL_2020": 520663,
+        "TOTAL_2019": 700975,
+        "TOTAL_2018": 649571,
+        "TOTAL_2017": 721928,
+        "TOTAL_2016": 707526
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -118.267254,
+          34.043017
+        ]
+      },
+      "properties": {
+        "TEAM": "Lakers",
+        "ARENA": "Crypto.com Arena",
+        "ADDRESS": "1111 S Figueroa St, Los Angeles, CA 90015",
+        "TOTAL_2025": 767626,
+        "TOTAL_2024": 793945,
+        "TOTAL_2023": 763168,
+        "TOTAL_2022": 764631,
+        "TOTAL_2021": 23313,
+        "TOTAL_2020": 588907,
+        "TOTAL_2019": 778877,
+        "TOTAL_2018": 776327,
+        "TOTAL_2017": 776917,
+        "TOTAL_2016": 778877
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -81.38394,
+          28.53917
+        ]
+      },
+      "properties": {
+        "TEAM": "Magic",
+        "ARENA": "Kia Center",
+        "ADDRESS": "400 W Church St, Orlando, FL 32801",
+        "TOTAL_2025": 762121,
+        "TOTAL_2024": 773939,
+        "TOTAL_2023": 728405,
+        "TOTAL_2022": 622881,
+        "TOTAL_2021": 130712,
+        "TOTAL_2020": 529870,
+        "TOTAL_2019": 720024,
+        "TOTAL_2018": 715728,
+        "TOTAL_2017": 727875,
+        "TOTAL_2016": 719275
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -96.810349,
+          32.790481
+        ]
+      },
+      "properties": {
+        "TEAM": "Mavericks",
+        "ARENA": "American Airlines Center",
+        "ADDRESS": "2500 Victory Ave, Dallas, TX 75219",
+        "TOTAL_2025": 803174,
+        "TOTAL_2024": 828897,
+        "TOTAL_2023": 827282,
+        "TOTAL_2022": 809315,
+        "TOTAL_2021": 94849,
+        "TOTAL_2020": 682096,
+        "TOTAL_2019": 820569,
+        "TOTAL_2018": 811453,
+        "TOTAL_2017": 811366,
+        "TOTAL_2016": 825901
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.975399,
+          40.68265
+        ]
+      },
+      "properties": {
+        "TEAM": "Nets",
+        "ARENA": "Barclays Center",
+        "ADDRESS": "620 Atlantic Ave, Brooklyn, NY 11217",
+        "TOTAL_2025": 713304,
+        "TOTAL_2024": 720291,
+        "TOTAL_2023": 724439,
+        "TOTAL_2022": 711539,
+        "TOTAL_2021": 30491,
+        "TOTAL_2020": 524907,
+        "TOTAL_2019": 612597,
+        "TOTAL_2018": 622278,
+        "TOTAL_2017": 632608,
+        "TOTAL_2016": 620142
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -105.007776,
+          39.748653
+        ]
+      },
+      "properties": {
+        "TEAM": "Nuggets",
+        "ARENA": "Ball Arena",
+        "ADDRESS": "1000 Chopper Cir, Denver, CO 80204",
+        "TOTAL_2025": 811211,
+        "TOTAL_2024": 807062,
+        "TOTAL_2023": 788635,
+        "TOTAL_2022": 695262,
+        "TOTAL_2021": 54554,
+        "TOTAL_2020": 633153,
+        "TOTAL_2019": 756457,
+        "TOTAL_2018": 702796,
+        "TOTAL_2017": 605585,
+        "TOTAL_2016": 577898
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.993439,
+          40.750504
+        ]
+      },
+      "properties": {
+        "TEAM": "NY Knicks",
+        "ARENA": "Madison Square Garden",
+        "ADDRESS": "4 Pennsylvania Plaza, New York, NY 10001",
+        "TOTAL_2025": 811794,
+        "TOTAL_2024": 808885,
+        "TOTAL_2023": 795110,
+        "TOTAL_2022": 763484,
+        "TOTAL_2021": 42131,
+        "TOTAL_2020": 620789,
+        "TOTAL_2019": 779087,
+        "TOTAL_2018": 792608,
+        "TOTAL_2017": 810741,
+        "TOTAL_2016": 812292
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.155572,
+          39.764061
+        ]
+      },
+      "properties": {
+        "TEAM": "Pacers",
+        "ARENA": "Gainbridge Fieldhouse",
+        "ADDRESS": "125 S Pennsylvania St, Indianapolis, IN 46204",
+        "TOTAL_2025": 685434,
+        "TOTAL_2024": 677554,
+        "TOTAL_2023": 641562,
+        "TOTAL_2022": 588743,
+        "TOTAL_2021": 0,
+        "TOTAL_2020": 529002,
+        "TOTAL_2019": 689310,
+        "TOTAL_2018": 658119,
+        "TOTAL_2017": 684578,
+        "TOTAL_2016": 690733
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.08152,
+          29.94903
+        ]
+      },
+      "properties": {
+        "TEAM": "Pelicans",
+        "ARENA": "Smoothie King Center",
+        "ADDRESS": "1501 Dave Dixon Dr, New Orleans, LA 70113",
+        "TOTAL_2025": 689400,
+        "TOTAL_2024": 692054,
+        "TOTAL_2023": 687691,
+        "TOTAL_2022": 635941,
+        "TOTAL_2021": 93120,
+        "TOTAL_2020": 528172,
+        "TOTAL_2019": 656183,
+        "TOTAL_2018": 673920,
+        "TOTAL_2017": 663099,
+        "TOTAL_2016": 688549
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -83.055535,
+          42.341046
+        ]
+      },
+      "properties": {
+        "TEAM": "Pistons",
+        "ARENA": "Little Caesars Arena",
+        "ADDRESS": "2645 Woodward Ave, Detroit, MI 48201",
+        "TOTAL_2025": 781929,
+        "TOTAL_2024": 726378,
+        "TOTAL_2023": 759715,
+        "TOTAL_2022": 663556,
+        "TOTAL_2021": 14250,
+        "TOTAL_2020": 509463,
+        "TOTAL_2019": 675963,
+        "TOTAL_2018": 713945,
+        "TOTAL_2017": 655141,
+        "TOTAL_2016": 677138
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.379098,
+          43.643466
+        ]
+      },
+      "properties": {
+        "TEAM": "Raptors",
+        "ARENA": "Scotiabank Arena",
+        "ADDRESS": "40 Bay St, Toronto, ON M5J 2X2, Canada",
+        "TOTAL_2025": 768573,
+        "TOTAL_2024": 800129,
+        "TOTAL_2023": 811261,
+        "TOTAL_2022": 547343,
+        "TOTAL_2021": 26024,
+        "TOTAL_2020": 633456,
+        "TOTAL_2019": 812822,
+        "TOTAL_2018": 813431,
+        "TOTAL_2017": 813050,
+        "TOTAL_2016": 812863
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -95.362127,
+          29.750843
+        ]
+      },
+      "properties": {
+        "TEAM": "Rockets",
+        "ARENA": "Toyota Center",
+        "ADDRESS": "1510 Polk St, Houston, TX 77002",
+        "TOTAL_2025": 716853,
+        "TOTAL_2024": 720045,
+        "TOTAL_2023": 668865,
+        "TOTAL_2022": 638977,
+        "TOTAL_2021": 117009,
+        "TOTAL_2020": 578458,
+        "TOTAL_2019": 740392,
+        "TOTAL_2018": 716008,
+        "TOTAL_2017": 695903,
+        "TOTAL_2016": 737244
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -98.4375,
+          29.42703
+        ]
+      },
+      "properties": {
+        "TEAM": "Spurs",
+        "ARENA": "Frost Bank Center",
+        "ADDRESS": "1 Frost Bank Center Dr, San Antonio, TX 78219",
+        "TOTAL_2025": 731474,
+        "TOTAL_2024": 742522,
+        "TOTAL_2023": 694434,
+        "TOTAL_2022": 615588,
+        "TOTAL_2021": 61053,
+        "TOTAL_2020": 550515,
+        "TOTAL_2019": 750616,
+        "TOTAL_2018": 754562,
+        "TOTAL_2017": 755347,
+        "TOTAL_2016": 756445
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -112.071306,
+          33.445712
+        ]
+      },
+      "properties": {
+        "TEAM": "Suns",
+        "ARENA": "PHX Arena",
+        "ADDRESS": "201 E Jefferson St, Phoenix, AZ 85004",
+        "TOTAL_2025": 699911,
+        "TOTAL_2024": 699911,
+        "TOTAL_2023": 682840,
+        "TOTAL_2022": 679252,
+        "TOTAL_2021": 104027,
+        "TOTAL_2020": 550633,
+        "TOTAL_2019": 627023,
+        "TOTAL_2018": 674655,
+        "TOTAL_2017": 708639,
+        "TOTAL_2016": 701405
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -97.515068,
+          35.463421
+        ]
+      },
+      "properties": {
+        "TEAM": "Thunder",
+        "ARENA": "Paycom Center",
+        "ADDRESS": "100 W Reno Ave, Oklahoma City, OK 73102",
+        "TOTAL_2025": 754832,
+        "TOTAL_2024": 715509,
+        "TOTAL_2023": 636903,
+        "TOTAL_2022": 595112,
+        "TOTAL_2021": 0,
+        "TOTAL_2020": 600699,
+        "TOTAL_2019": 746323,
+        "TOTAL_2018": 746323,
+        "TOTAL_2017": 746323,
+        "TOTAL_2016": 746323
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -93.27606,
+          44.97953
+        ]
+      },
+      "properties": {
+        "TEAM": "Timberwolves",
+        "ARENA": "Target Center",
+        "ADDRESS": "600 N 1st Ave, Minneapolis, MN 55403",
+        "TOTAL_2025": 772249,
+        "TOTAL_2024": 738984,
+        "TOTAL_2023": 687510,
+        "TOTAL_2022": 657148,
+        "TOTAL_2021": 15774,
+        "TOTAL_2020": 482112,
+        "TOTAL_2019": 627543,
+        "TOTAL_2018": 699308,
+        "TOTAL_2017": 607203,
+        "TOTAL_2016": 581178
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.666841,
+          45.531567
+        ]
+      },
+      "properties": {
+        "TEAM": "Trail Blazers",
+        "ARENA": "Moda Center",
+        "ADDRESS": "1 N Center Ct St, Portland, OR 97227",
+        "TOTAL_2025": 719369,
+        "TOTAL_2024": 751395,
+        "TOTAL_2023": 767374,
+        "TOTAL_2022": 705608,
+        "TOTAL_2021": 7756,
+        "TOTAL_2020": 608634,
+        "TOTAL_2019": 799345,
+        "TOTAL_2018": 795328,
+        "TOTAL_2017": 792029,
+        "TOTAL_2016": 794085
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.38703,
+          37.76802
+        ]
+      },
+      "properties": {
+        "TEAM": "Warriors",
+        "ARENA": "Chase Center",
+        "ADDRESS": "1 Warriors Way, San Francisco, CA 94158",
+        "TOTAL_2025": 740624,
+        "TOTAL_2024": 740624,
+        "TOTAL_2023": 740624,
+        "TOTAL_2022": 740624,
+        "TOTAL_2021": 33457,
+        "TOTAL_2020": 614176,
+        "TOTAL_2019": 803436,
+        "TOTAL_2018": 803436,
+        "TOTAL_2017": 803436,
+        "TOTAL_2016": 803436
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.020911,
+          38.898126
+        ]
+      },
+      "properties": {
+        "TEAM": "Wizards",
+        "ARENA": "Capital One Arena",
+        "ADDRESS": "601 F St NW, Washington, DC 20004",
+        "TOTAL_2025": 663691,
+        "TOTAL_2024": 692851,
+        "TOTAL_2023": 710481,
+        "TOTAL_2022": 637215,
+        "TOTAL_2021": 21331,
+        "TOTAL_2020": 532702,
+        "TOTAL_2019": 716996,
+        "TOTAL_2018": 718946,
+        "TOTAL_2017": 697107,
+        "TOTAL_2016": 725426
+      }
+    }
+  ]
+}
