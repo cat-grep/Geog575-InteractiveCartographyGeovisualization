@@ -38,3 +38,7 @@ h1 {
 .leaflet-tooltip.year-label::before {
     display: none !important;
 }
+
+.leaflet-popup-content p {
+    margin: 0.2em 0;
+}

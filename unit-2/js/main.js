@@ -49,51 +49,126 @@ function calcPropRadius(attValue) {
     var minRadius = 3;
 
     //Flannery Apperance Compensation formula
-    var radius = 1.0083 * Math.pow(attValue / minValue, 0.5715) * minRadius
+    var radius = 1 * Math.pow(attValue / minValue, 0.5) * minRadius
 
     return radius;
 };
 
 //function to bind popups to each feature
 function onEachFeature(feature, layer) {
+    if (!feature.properties) return;
 
-    //no property named popupContent; instead, create html string with all properties
-    var popupContent = "";
-    if (feature.properties) {
+    const FIELD_ORDER = [
+        // "Primary_ID",
+        // "Code",
+        "Latin_Name",
+        "Common_Name",
+        // "Cultivar",
+        "Diameter__in__",
+        // "Diameter__in___Range",
+        // "Diameter_height__if_not_4_5___",
+        // "Height__ft__",
+        // "Height__ft___Range",
+        // "Growing_Space",
+        "Inventory_Year",
+        // "Land_Use",
+        // "Planting_Strip_Width__ft___Rang",
+        "Address",
+        "Latitude",
+        "Longitude",
+        // "Community",
+        // "Year_Planted",
+        // "ObjectId"
+    ];
 
-        //loop to add feature property names and values to html string
-        for (var property in feature.properties) {
-            popupContent += "<p>" + property + ": " + feature.properties[property] + "</p>";
-        }
-        layer.bindPopup(popupContent);
+    const FIELD_LABELS = {
+        // Primary_ID: "Primary ID",
+        // Code: "Code",
+        Latin_Name: "Latin Name",
+        Common_Name: "Common Name",
+        // Cultivar: "Cultivar",
+        Diameter__in__: "DBH (in)",
+        // Diameter__in___Range: "DBH Range (in)",
+        // Diameter_height__if_not_4_5___: "Diameter Height (if not 4.5')",
+        // Height__ft__: "Height (ft)",
+        // Height__ft___Range: "Height Range (ft)",
+        // Growing_Space: "Growing Space",
+        Inventory_Year: "Inventory Year",
+        // Land_Use: "Land Use",
+        // Planting_Strip_Width__ft___Rang: "Planting Strip Width (ft) Range",
+        Address: "Address",
+        Latitude: "Latitude",
+        Longitude: "Longitude",
+        // Community: "Community",
+        // Year_Planted: "Year Planted",
+        // ObjectId: "Object ID"
     };
+
+    // minimal helpers (scoped inside, no globals)
+    const esc = (s) => String(s)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+
+    const fmt = (v, key) => {
+        if (v === null || v === undefined || v === "") return "&lt;NULL&gt;";
+        if ((key === "Latitude" || key === "Longitude") && !Number.isNaN(Number(v))) {
+            return Number(v).toFixed(6);
+        }
+        return esc(v);
+    };
+
+    const keys = (FIELD_ORDER && FIELD_ORDER.length)
+        ? FIELD_ORDER.filter(k => k in feature.properties)
+        : Object.keys(feature.properties);
+
+    const rows = keys.map((key) => {
+        const label = esc(FIELD_LABELS[key] || key);
+        const val = fmt(feature.properties[key], key);
+        return `<tr>
+                    <th style="text-align:right;padding:6px 8px;border:1px solid #ddd;background:#f6f7f9;">${label}</th>
+                    <td style="padding:6px 8px;border:1px solid #ddd;background:#fff;">${val}</td>
+                </tr>`;
+        }).join("");
+
+    const table = `<table style="border-collapse:collapse;width:100%;font-size:13px;line-height:1.35;">
+                        <tbody>${rows}</tbody>
+                    </table>`;
+
+    layer.bindPopup(table);
 };
 
+function pointToLayer(feature, latlng) {
+    //Determine which attribute to visualize with proportional symbols
+    var attribute = "Diameter__in__";
 
-function createPropSymbols(data) {
     //create marker options
-    var geojsonMarkerOptions = {
-        radius: 8,
+    var options = {
         fillColor: "#006400",
-        color: "#000",
+        color: "#fff",
         weight: 1,
-        opacity: 1,
+        opacity: 0.8,
         fillOpacity: 0.8
     };
 
+    //For each feature, determine its value for the selected attribute
+    var attValue = Number(feature.properties[attribute]);
+
+    //Give each feature's circle marker a radius based on its attribute value
+    options.radius = calcPropRadius(attValue);
+
+    //create circle marker layer
+    var layer = L.circleMarker(latlng, options);
+
+    //return the circle marker to the L.geoJson pointToLayer option
+    return layer;
+};
+
+function createPropSymbols(data) {
     //create a Leaflet GeoJSON layer and add it to the map
     L.geoJson(data, {
-        pointToLayer: function (feature, latlng) {
-
-            //for each feature, determine its value for the selected attribute
-            var attValue = Number(feature.properties["Diameter__in__"]);
-
-            //give each feature's circle marker a radius based on its attribute value
-            geojsonMarkerOptions.radius = calcPropRadius(attValue);
-
-            //create circle markers
-            return L.circleMarker(latlng, geojsonMarkerOptions);
-        },
+        pointToLayer: pointToLayer,
         onEachFeature: onEachFeature
     }).addTo(map);
 };
