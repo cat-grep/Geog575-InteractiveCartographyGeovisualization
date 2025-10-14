@@ -1,218 +1,217 @@
-html {
-    height: 100%
-}
-
+html,
 body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-}
-
-h1 {
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    position: absolute;
-    top: 10px;
-    width: 99%;
-    text-align: center;
-    z-index: 1000;
-    color: #000;
-    text-shadow: 0 0 5px #fff, 0 0 7px #fff, 0 0 9px #fff;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  overflow: hidden;
 }
 
 #map {
-    height: 70%;
-    width: 99%;
-    display: inline-block;
+  height: 100%;
+  width: 100%;
 }
 
-#panel {  
-    width: 99%; 
-    height: 20%; 
-    padding: 0px;  
-    display: inline-block;  
-    vertical-align: top;  
-    text-align: center;  
-    line-height: 42px;  
-}  
-
-.range-slider {  
-    width: 50%;  
-}  
-
-.leaflet-tooltip.year-label {
-    background: transparent;
-    border: none;
-    box-shadow: none;
-    padding: 0;
-    margin-left: 2px;
-    font: 12px/1.2 Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    color: #fff;
-    text-shadow: 0 0 3px #000, 0 0 5px #000, 0 0 7px #000;
-    pointer-events: none;
+h1 {
+  position: absolute;
+  top: 10px;
+  width: 99%;
+  text-align: center;
+  z-index: 1000;
+  color: #000;
+  text-shadow: 0 0 5px #fff, 0 0 7px #fff, 0 0 9px #fff;
 }
 
-.leaflet-tooltip.year-label::before {
-    display: none !important;
+.legend-control-container,
+.scale-control-container,
+.sequence-control-container,
+.summary-panel {
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 5px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
+  padding: 10px;
+  border: none;
 }
 
-.leaflet-popup-content p {
-    margin: 0.2em 0;
-}
-
-.controls-row {
+/* --- YEAR SLIDER CONTROL --- */
+.sequence-control-container {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin: 8px 0 4px;
+  /* Spacing between buttons and slider */
+  width: 350px;
 }
 
-.controls-row .step {
-  /* pick a size you like */
-  --btn: clamp(44px, 6vh, 64px);
-
-  width: var(--btn);
-  height: var(--btn);
-  padding: 0;                 /* no inner padding so it's truly square */
-  border-radius: 6px;         /* set 0 for sharp corners if you want */
-  display: grid;
-  place-items: center;
-  border: 1px solid #bbb;
-  background: #f6f6f6;
-  box-shadow: 0 1px 0 rgba(0,0,0,.05) inset;
-}
-
-.controls-row .step img {
-  width: calc(var(--btn) * 0.55);   /* icon scales with button */
-  height: calc(var(--btn) * 0.55);
-}
-
-/* Slider wrapper: provides a coordinate system for ticks */
-.slider-wrap {
-  position: relative;
-  flex: 1;
-  /* tune these to match the actual thumb in your browser */
-  --thumb-w: 16px;      /* slider thumb width */
-  --track-h: 6px;       /* visual track height */
-}
-
-/* Normalize the range input track so we can align ticks */
-.slider-wrap .range-slider {
-  -webkit-appearance: none;
-  appearance: none;
+.sequence-control-container .range-slider {
   width: 100%;
-  height: 28px;         /* enough vertical space for overlayed ticks below */
-  background: transparent;
-  margin: 0;
-  padding: 0;
+  /* Let the slider fill the available space */
 }
 
-/* WebKit track */
-.slider-wrap .range-slider::-webkit-slider-runnable-track {
-  height: var(--track-h);
-  background: #ddd;
+.sequence-control-container .step {
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
   border-radius: 4px;
-}
-.slider-wrap .range-slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: var(--thumb-w);
-  height: var(--thumb-w);
-  border-radius: 50%;
-  background: #016ecd;
-  border: 2px solid #fff;
-  margin-top: calc((var(--track-h) - var(--thumb-w)) / 2); /* center on track */
-  box-shadow: 0 0 0 1px #ccc;
   cursor: pointer;
+  flex-shrink: 0;
+  /* Prevent buttons from shrinking */
+  width: 30px;
+  height: 30px;
+  padding: 4px;
 }
 
-
-.slider-wrap .range-slider::-moz-range-track {
-  height: var(--track-h);
-  background: #ddd;
-  border-radius: 4px;
-}
-.slider-wrap .range-slider::-moz-range-thumb {
-  width: var(--thumb-w);
-  height: var(--thumb-w);
-  border: 2px solid #fff;
-  border-radius: 50%;
-  background: #016ecd;
-  box-shadow: 0 0 0 1px #ccc;
-  cursor: pointer;
+.sequence-control-container .step:hover {
+  background-color: #f0f0f0;
 }
 
-/* Ticks aligned to the *usable* track (accounting for thumb width) */
-.slider-wrap .ticks {
-  position: absolute;
-  left: 0;
-  right: 0;
-  /* place ticks just below track */
-  top: calc((var(--track-h) / 2) + 14px);
-  height: 22px;
-  pointer-events: none;
+.sequence-control-container .step img {
+  width: 100%;
+  height: 100%;
 }
 
-.slider-wrap .ticks .tick {
-  position: absolute;
-  /* usable width is 100% minus two thumb half-widths;
-     we offset left by half a thumb so end ticks align with track ends */
-  left: calc( (var(--thumb-w) / 2) + var(--pct) * (100% - var(--thumb-w)) );
-  transform: translateX(-50%);
+/* --- SCALE TOGGLE CONTROL --- */
+.scale-control-container {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.scale-title {
+  font-weight: bold;
+  margin-bottom: 5px;
   text-align: center;
-  font-size: 11px;
-  color: #555;
-  line-height: 1;
 }
 
-.slider-wrap .ticks .tick i {
+.scale-control-container label {
   display: block;
-  width: 1px;
-  height: 8px;
-  background: #666;
-  margin: 0 auto 3px;
+  cursor: pointer;
 }
 
-.slider-wrap .ticks .tick em {
-  display: block;
-  font-style: normal;
-  white-space: nowrap;
-}
-
-/* prevent labels from touching the edges */
-.slider-wrap .ticks .tick:first-child em,
-.slider-wrap .ticks .tick:last-child em {
-  transform: translateX(0);
-}
-
-.sequence-control-container {  
-    width: 350px;  
-    height: 30px;  
-    background-color: rgba(255,255,255,0.8);  
-    padding: 10px;  
-    line-height: 45px;  
-    text-align: center;  
-    border: solid gray 1px;  
-}  
-
-.range-slider {  
-    width: 250px;  
-}  
-
-.step {  
-    width: 40px;  
-}  
-
-.step img {  
-    width: 100%;  
-    height: auto;  
-} 
-
+/* --- LEGEND CONTROL --- */
 .legend-control-container {
-    width: 160px;  
-    height: 100px;  
-    background-color: rgba(255,255,255,0.8);  
-    padding: 10px;  
-    line-height: 30px;  
-    text-align: center;  
-    border: solid gray 1px;
+  text-align: center;
+}
+
+.legend-text {
+  font-size: 12px;
+  fill: #333;
+}
+
+/* --- SUMMARY (CHART) PANEL --- */
+.summary-panel {
+  position: relative;
+  width: 280px;
+  z-index: 1000;
+}
+
+.summary-title {
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 8px;
+  text-align: center;
+  color: #333;
+}
+
+#summary-content {
+  position: relative;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#team-chart {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+#summary-prompt {
+  color: #666;
+  text-align: center;
+  padding: 10px;
+  font-size: 13px;
+}
+
+.leaflet-control-search {
+    position: relative; /* Ensures it fits in the flexbox container */
+    margin-left: 5px;
+}
+
+/* --- RESPONSIVE STYLES FOR SMALLER SCREENS --- */
+
+/* medium screens */
+@media (max-width: 768px) {
+
+  .sequence-control-container,
+  .scale-control-container{
+    top: 50px;
+    max-width: 300px;
+  }
+  
+  .summary-panel,
+  .legend-control-container {
+    max-width: 350px;
+  }
+
+  h1 {
+    position: absolute;
+    top: 10px;
+    width: 100%;
+    text-align: center;
+    z-index: 500;
+    color: #000;
+    text-size-adjust: 60%;
+    text-shadow: 0 0 5px #fff, 0 0 7px #fff, 0 0 9px #fff;
+  }
+
+  /* Make slider buttons smaller */
+  .sequence-control-container .step {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+/* small screens */
+@media (max-width: 480px) {
+
+  .sequence-control-container,
+  .scale-control-container{
+    top: 50px;
+    max-width: 100px;
+  }
+  
+  .summary-panel,
+  .legend-control-container {
+    max-width: 100px;
+  }
+  
+  h1 {
+    position: absolute;
+    top: 10px;
+    width: 100%;
+    text-align: center;
+    z-index: 500;
+    color: #000;
+    text-size-adjust: 60%;
+    text-shadow: 0 0 5px #fff, 0 0 7px #fff, 0 0 9px #fff;
+  }
+
+  /* Make the slider buttons a bit smaller on phones */
+  .sequence-control-container .step {
+    width: 24px;
+    height: 24px;
+  }
+
+  /* Make fonts smaller */
+  .scale-title,
+  .summary-title {
+    font-size: 14px;
+  }
+
+  .scale-control-container label {
+    font-size: 13px;
+  }
+
+  #summary-prompt {
+    font-size: 12px;
+  }
 }
