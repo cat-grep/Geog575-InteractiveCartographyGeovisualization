@@ -1,0 +1,12 @@
+[
+  { "rank": 1, "region": "California", "loss_usd": 1393628996 },
+  { "rank": 2, "region": "Texas", "loss_usd": 738583341 },
+  { "rank": 3, "region": "Florida", "loss_usd": 584746970 },
+  { "rank": 4, "region": "New York", "loss_usd": 375087857 },
+  { "rank": 5, "region": "Illinois", "loss_usd": 272633678 },
+  { "rank": 6, "region": "District of Columbia", "loss_usd": 262640821 },
+  { "rank": 7, "region": "New Jersey", "loss_usd": 236721074 },
+  { "rank": 8, "region": "Pennsylvania", "loss_usd": 218642276 },
+  { "rank": 9, "region": "Washington", "loss_usd": 204694032 },
+  { "rank": 10, "region": "Massachusetts", "loss_usd": 201530349 }
+]
