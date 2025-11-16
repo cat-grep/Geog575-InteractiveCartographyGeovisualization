@@ -3,6 +3,7 @@
     //variables for data join
     var attrArray = ["rank", "state", "loss_usd"];
     var expressed = attrArray[2]; //initial attribute
+    var tooltip; // will hold reference to tooltip div
 
     //begin script when window loads
     window.onload = setMap();
@@ -21,19 +22,21 @@
             .attr("width", width)
             .attr("height", height);
 
+        // create a tooltip div (hidden by default)
+        tooltip = d3.select("body")
+            .append("div")
+            .attr("class", "tooltip")
+            .style("position", "absolute")
+            .style("visibility", "hidden");
+
         //create Albers equal area conic projection centered on France
-        var projection = d3.geoAlbers()
-            .center([-90, 35])
-            .rotate([50, 40, 20])
-            .parallels([30, 45])
-            .scale(600)
-            .translate([width / 2, height / 2]);
+        var projection = d3.geoAlbersUsa()
+                .scale(600)
+                .translate([width / 2, height / 2]);
 
         var path = d3.geoPath()
             .projection(projection);
 
-        //use Promise.all to parallelize asynchronous data loading
-        // var promises = [d3.json("data/crypto_loss_by_state.topojson")];
         var promises = [
             d3.json("data/ne_110m_admin_0_countries.topojson"),
             d3.json("data/ne_110m_admin_1_states_provinces_simplified.topojson"),
@@ -46,11 +49,6 @@
             var countries_topojson = data[0],
                 us_states_topojson = data[1],
                 csvData = data[2];
-            // console.log(countries_topojson);
-            // console.log(us_states_topojson);
-
-            // console.log(Object.keys(countries_topojson.objects));
-            // console.log(Object.keys(us_states_topojson.objects));
 
             //place graticule on the map
             setGraticule(map, path);
@@ -59,19 +57,11 @@
             var countries_geojson = topojson.feature(countries_topojson, countries_topojson.objects.ne_110m_admin_0_countries),
                 us_states_geojson = topojson.feature(us_states_topojson, us_states_topojson.objects.ne_110m_admin_1_states_provinces).features;
 
-            //examine the results
-            // console.log(countries_geojson);
-            // console.log(us_states_geojson);
-
             //add countries to map
             var countries = map.append("path")
                 .datum(countries_geojson)
                 .attr("class", "countries")
                 .attr("d", path);
-            // var states = map.append("path")
-            //     .datum(us_states_geojson)
-            //     .attr("class", "states")
-            //     .attr("d", path);
 
             //join csv data to GeoJSON enumeration units
             us_states_geojson = joinData(us_states_geojson, csvData);
@@ -81,6 +71,9 @@
 
             //add enumeration units to the map
             setEnumerationUnits(us_states_geojson, map, path, colorScale);
+
+            //add legend to the map
+            setLegend(map, colorScale);
 
             //add coordinated visualization to the map
             setChart(csvData, colorScale);
@@ -152,18 +145,6 @@
         //assign array of expressed values as scale domain
         colorScale.domain(domainArray);
 
-        // console.log(colorScale.quantiles())
-
-        // //build two-value array of minimum and maximum expressed attribute values
-        // var minmax = [
-        //     d3.min(data, function (d) { return parseFloat(d[expressed]); }),
-        //     d3.max(data, function (d) { return parseFloat(d[expressed]); })
-        // ];
-        // //assign two-value array as scale domain
-        // colorScale.domain(minmax);
-
-        // console.log(colorScale.quantiles())
-
         //cluster data using ckmeans clustering algorithm to create natural breaks
         var clusters = ss.ckmeans(domainArray, 5);
         //reset domain array to cluster minimums
@@ -185,6 +166,7 @@
             .attr("class", function (d) {
                 return "states " + d.properties.adm1_code;
             })
+            .attr("data-adm1", function(d) { return d.properties.adm1_code; })
             .attr("d", path)
             .style("fill", function (d) {
                 var value = d.properties[expressed];
@@ -193,7 +175,95 @@
                 } else {
                     return "#ccc";
                 }
+            })
+            .on("mouseover", function(event, d) {
+                var name = d.properties.name || d.properties.state || "Unknown";
+                var val = d.properties[expressed];
+                var fmt = d3.format("$,.0f");
+                var html = "<strong>" + name + "</strong><br/>" + (val ? fmt(val) : "No data");
+                tooltip.html(html).style("visibility", "visible");
+                var code = d.properties.adm1_code;
+                // add highlight class to both the state and its corresponding bar(s)
+                d3.selectAll('[data-adm1="' + code + '"]').classed('highlight', true);
+                // bring hovered state to front
+                d3.select(this).raise();
+            })
+            .on("mousemove", function(event) {
+                tooltip.style("left", (event.pageX + 10) + "px").style("top", (event.pageY + 10) + "px");
+            })
+            .on("mouseout", function(event, d) {
+                tooltip.style("visibility", "hidden");
+                var code = d.properties.adm1_code;
+                d3.selectAll('[data-adm1="' + code + '"]').classed('highlight', false);
             });
+    };
+
+    //function to create a legend for the choropleth
+    function setLegend(map, colorScale) {
+        var legend = map.append("g")
+            .attr("class", "legend")
+            .attr("transform", "translate(20,20)");
+
+        var colors = colorScale.range();
+        var quantiles = colorScale.quantiles();
+        var domain = colorScale.domain();
+        var min = d3.min(domain);
+        var max = d3.max(domain);
+
+        var itemWidth = 10, itemHeight = 10;
+        var formatM = function(v) { return (v / 1e6).toFixed(1) + "M"; };
+
+        //build class ranges for labeling
+        var breaks = [];
+        for (var i = 0; i < colors.length; i++) {
+            var lower = (i === 0) ? min : quantiles[i - 1];
+            var upper = (i < quantiles.length) ? quantiles[i] : max;
+            breaks.push({ color: colors[i], lower: lower, upper: upper });
+        }
+
+        // compute legend background size (approximate fixed width)
+        var legendWidth = 100; // adjust if labels are long
+        var legendHeight = breaks.length * (itemHeight + 6) + 15; // include title + padding
+
+        // background rectangle (semi-transparent)
+        legend.append("rect")
+            .attr("class", "legendBg")
+            .attr("x", -10)
+            .attr("y", -18)
+            .attr("width", legendWidth)
+            .attr("height", legendHeight)
+            .attr("rx", 6)
+            .attr("ry", 6)
+            .style("fill", "#fff")
+            .style("opacity", 0.72)
+            .style("stroke", "#999")
+            .style("stroke-width", 0.5);
+
+        //legend title
+        legend.append("text")
+            .attr("class", "legendTitle")
+            .attr("x", 0)
+            .attr("y", -5)
+            .text("Loss (USD)");
+
+        var legendItem = legend.selectAll(".legendItem")
+            .data(breaks)
+            .enter().append("g")
+            .attr("class", "legendItem")
+            .attr("transform", function(d, i) { return "translate(0," + (i * (itemHeight + 5)) + ")"; });
+
+        legendItem.append("rect")
+            .attr("width", itemWidth)
+            .attr("height", itemHeight)
+            .style("fill", function(d) { return d.color; })
+            .style("stroke", "#000")
+            .style("stroke-width", 0.2);
+
+        legendItem.append("text")
+            .attr("x", itemWidth + 4)
+            .attr("y", itemHeight / 2 + 2)
+            .attr("dy", "0.2em")
+            .text(function(d) { return formatM(d.lower) + " - " + formatM(d.upper); });
     };
 
     //function to create coordinated bar chart
@@ -224,9 +294,6 @@
             .attr("transform", translate);
 
         // find the maximum data value
-        // var maxVal = d3.max(csvData, function (d) {
-        //     return parseFloat(d[expressed]);
-        // });
         const maxM = d3.max(csvData, d => (+d[expressed] || 0) / 1e6) || 0;
 
         // X: states as band
@@ -253,6 +320,7 @@
             .attr("class", function (d) {
                 return "bars " + (d.adm1_code || "na");
             })
+            .attr("data-adm1", function(d) { return d.adm1_code; })
             .attr("width", xScale.bandwidth())
             .attr("height", function (d) {
                 return chartInnerHeight - yScale((+d[expressed] || 0) / 1e6);
@@ -265,6 +333,26 @@
             })
             .style("fill", function (d) {
                 return colorScale(+d[expressed] || 0);
+            });
+
+        // add tooltip interactivity to bars and sync highlight with map
+        bars.on("mouseover", function(event, d) {
+                var name = d.state || d["state"] || "Unknown";
+                var val = +d[expressed] || 0;
+                var fmt = d3.format("$,.0f");
+                var html = "<strong>" + name + "</strong><br/>" + (val ? fmt(val) : "No data");
+                tooltip.html(html).style("visibility", "visible");
+                var code = d.adm1_code;
+                d3.selectAll('[data-adm1="' + code + '"]').classed('highlight', true);
+                d3.select(this).raise();
+            })
+            .on("mousemove", function(event) {
+                tooltip.style("left", (event.pageX + 10) + "px").style("top", (event.pageY + 10) + "px");
+            })
+            .on("mouseout", function(event, d) {
+                tooltip.style("visibility", "hidden");
+                var code = d.adm1_code;
+                d3.selectAll('[data-adm1="' + code + '"]').classed('highlight', false);
             });
 
         // helper function to format numbers
