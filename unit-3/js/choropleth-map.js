@@ -22,14 +22,14 @@
             .attr("width", width)
             .attr("height", height);
 
-        // create a tooltip div (hidden by default)
+        //create a tooltip div (hidden by default)
         tooltip = d3.select("body")
             .append("div")
             .attr("class", "tooltip")
             .style("position", "absolute")
             .style("visibility", "hidden");
 
-        //create Albers equal area conic projection centered on France
+        //create Albers equal area conic projection
         var projection = d3.geoAlbersUsa()
                 .scale(600)
                 .translate([width / 2, height / 2]);
@@ -118,7 +118,6 @@
                 };
             };
         };
-        // console.log(us_states_geojson);
         return us_states_geojson;
     };
 
@@ -293,10 +292,10 @@
             .attr("height", chartInnerHeight)
             .attr("transform", translate);
 
-        // find the maximum data value
+        //find the maximum data value
         const maxM = d3.max(csvData, d => (+d[expressed] || 0) / 1e6) || 0;
 
-        // X: states as band
+        //X: states as band
         const NAME_FIELD = "state";
         const xScale = d3.scaleBand()
             .domain(csvData.map(d => d[NAME_FIELD]))
@@ -335,7 +334,7 @@
                 return colorScale(+d[expressed] || 0);
             });
 
-        // add tooltip interactivity to bars and sync highlight with map
+        //add tooltip interactivity to bars and sync highlight with map
         bars.on("mouseover", function(event, d) {
                 var name = d.state || d["state"] || "Unknown";
                 var val = +d[expressed] || 0;
@@ -355,7 +354,7 @@
                 d3.selectAll('[data-adm1="' + code + '"]').classed('highlight', false);
             });
 
-        // helper function to format numbers
+        //helper function to format numbers
         function formatNumber(num) {
             if (num >= 1000000) {
                 return (num / 1000000).toFixed(1) + 'M';
